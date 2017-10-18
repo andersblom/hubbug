@@ -1,9 +1,9 @@
 {
-  "name": "hubbug",
-  "version": "0.0.0",
+  "name": "HubBug",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./server/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
