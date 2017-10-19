@@ -8,17 +8,16 @@
     "start": "npm-run-all --parallel server client",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    
-    "test-server": "mocha ./server/test",
+    "test-server": "mocha ./server/tests",
     "test": "npm run test-server"
-
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
     "express": "~4.15.2",
-    "mongoose": "^4.12.3",
+    "mongoose": "^4.10.8",
     "morgan": "~1.8.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
