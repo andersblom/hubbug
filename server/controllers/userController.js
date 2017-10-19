@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+// POST /users/create
 exports.createUser = async (req, res, next) => {
     try {
         const newUser = await (new User(req.body));
@@ -17,3 +18,5 @@ exports.createUser = async (req, res, next) => {
         next(err);
     }
 }
+
+//

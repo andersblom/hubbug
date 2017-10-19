@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         required: "Please enter a password",
         trim: true,
         type: String,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 });
 
