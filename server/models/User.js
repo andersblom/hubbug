@@ -10,7 +10,12 @@ const userSchema = new mongoose.Schema({
         trim: true,
         unique: true,
         lowercase: true,
-        validate: [validator.isEmail, "Please enter a valid email address"],
+        validate:{
+            validator: (value) => {
+              return validator.isEmail(value);  
+            },
+            message:'{VALUE} is not a valid Email'
+       },
     },
     password: {
         required: "Please enter a password",
@@ -19,10 +24,11 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre("save", function(req, res, next) {
-    console.log(req);
-    // req.body = md5(req.body);
+userSchema.pre("save", function(next) {
+    this.password = md5(this.password);
     next();
 })
 
 userSchema.plugin(mongodbErrorHandler);
+
+module.exports = mongoose.model("User", userSchema);
