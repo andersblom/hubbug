@@ -22,7 +22,7 @@ mongoose.connect((app.settings.env === "test") ? process.env.TEST_MONGO_URL : pr
 	if (err) {
 		console.log('🖥  🛑 Error connecting to the database. ' + err);
 	} else {
-		console.log('🖥  ✅ Connected to Database: ' + (app.settings.env === "test" ? "hubbug-tests" : "hubbug @ MLAB"));
+		// console.log('🖥  ✅ Connected to Database: ' + (app.settings.env === "test" ? "hubbug-tests" : "hubbug @ MLAB"));
 	}
 });
 mongoose.Promise = global.Promise;

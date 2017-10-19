@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
 const server = require('../app');
-const User = require('../models/User');
+var User = mongoose.model("User");
 const md5 = require("md5");
 
 chai.use(chaiHttp);

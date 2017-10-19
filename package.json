@@ -9,7 +9,7 @@
     "start-all": "npm-run-all --parallel start:server start:client",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test:server": "nodemon --exec 'mocha ./server/tests || true'",
+    "test:server": "nodemon --exec mocha server/tests",
     "test": "npm run test-server"
   },
   "dependencies": {
