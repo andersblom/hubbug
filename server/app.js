@@ -27,6 +27,7 @@ mongoose.connect((app.settings.env === "test") ? process.env.TEST_MONGO_URL : pr
 });
 mongoose.Promise = global.Promise;
 
+// routes -> routes/index.js
 app.use('/', routes);
 
 // catch 404 and forward to error handler
