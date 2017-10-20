@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 
-const reporterSchema = new mongoose.Schema({
+const reportSchema = new mongoose.Schema({
     title: {
         type: String,
         required: "Please enter a title",
@@ -29,6 +29,6 @@ const reporterSchema = new mongoose.Schema({
     }
 });
 
-reporterSchema.plugin(mongodbErrorHandler);
+reportSchema.plugin(mongodbErrorHandler);
 
-module.exports = mongoose.model("Reporter", reporterSchema);
+module.exports = mongoose.model("Report", reportSchema);
