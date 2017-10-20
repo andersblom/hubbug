@@ -29,11 +29,8 @@ exports.loginAsUser = async (req, res, next) => {
             email: req.body.email
         });
 
-        console.log("user: ", user);
-
         // User wasn't found
         if (!user) {
-            console.log("notfound");
             res.status(204);
             res.json({
                 message: "No user was found",
@@ -42,7 +39,6 @@ exports.loginAsUser = async (req, res, next) => {
 
         // Password was wrong
         if (user.password !== md5(req.body.password)) {
-            console.log("wrongpw");
             res.status(204);
             res.json({
                 message: "Wrong password"
@@ -50,7 +46,6 @@ exports.loginAsUser = async (req, res, next) => {
         } 
 
         // Assuming user is found and password is OK:
-        console.log("gottem");
         res.status(200);
         res.json({
             message: "success",

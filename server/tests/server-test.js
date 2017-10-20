@@ -38,7 +38,6 @@ describe("Users", () => {
             password: "testing"
         })
         .end((err, res) => {
-            console.log(res.body);
             res.should.have.status(201);
             res.should.be.json;
             res.body.should.be.a("object");
@@ -67,7 +66,6 @@ describe("Users", () => {
                 password: "testing"
             })
             .end((err, res) => {
-                console.log("YES:", res.body)
                 res.statusCode.should.be.equal(200);
                 res.body.should.be.a("object");
                 res.body.message.should.equal("success");
