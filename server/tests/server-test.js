@@ -52,34 +52,28 @@ describe("Users", () => {
 
     // POST /user
     it("should return success on log in", done => {
-        const user = new User({
-			email: 'samantha@example.com',
-			password: 'testing'
-		});
-		user.save(function (err) {
-            chai.request(server)
-            .post('/user')
-            .send({
-                email: "samantha@example.com",
-                password: "testing"
-            })
-            .end((err, res) => {
-                res.statusCode.should.be.equal(200);
-                res.body.should.be.a("object");
-                res.body.message.should.equal("success");
-                res.body.result.should.be.a("object");
-                res.body.result.should.have.property("_id");
-                res.body.result.should.have.property("email");
-                res.body.result.should.have.property("password");
-                res.body.result.should.have.property("createdAt");
-                res.body.result.email.should.be.equal("samantha@example.com");
-                done();
-            });
+        chai.request(server)
+        .post('/user')
+        .send({
+            email: "testuser@example.com",
+            password: "testing"
+        })
+        .end((err, res) => {
+            res.statusCode.should.be.equal(200);
+            res.body.should.be.a("object");
+            res.body.message.should.equal("success");
+            res.body.result.should.be.a("object");
+            res.body.result.should.have.property("_id");
+            res.body.result.should.have.property("email");
+            res.body.result.should.have.property("password");
+            res.body.result.should.have.property("createdAt");
+            res.body.result.email.should.be.equal("testuser@example.com");
+            done();
         });
     });
 
+    it("should create a Bug-Reporter instance");
     it("should find a users Bug-Reporter instances");
-    
     it("should be able to edit a Bug-Reporter info");
 });
 
