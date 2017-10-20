@@ -29,6 +29,7 @@ describe("Users", () => {
         done();
     })
 
+    // POST /user/create
     it("should create user on POST /user/create", done => {
         chai.request(server)
         .post('/user/create')
@@ -52,6 +53,7 @@ describe("Users", () => {
         });
     });
 
+    // POST /user
     it("should return success on log in", done => {
         const user = new User({
 			email: 'samantha@example.com',
@@ -68,6 +70,13 @@ describe("Users", () => {
                 console.log("YES:", res.body)
                 res.statusCode.should.be.equal(200);
                 res.body.should.be.a("object");
+                res.body.message.should.equal("success");
+                res.body.result.should.be.a("object");
+                res.body.result.should.have.property("_id");
+                res.body.result.should.have.property("email");
+                res.body.result.should.have.property("password");
+                res.body.result.should.have.property("createdAt");
+                res.body.result.email.should.be.equal("samantha@example.com");
                 done();
             });
         });

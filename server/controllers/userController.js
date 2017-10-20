@@ -53,7 +53,8 @@ exports.loginAsUser = async (req, res, next) => {
         console.log("gottem");
         res.status(200);
         res.json({
-            success: user
+            message: "success",
+            result: user
         });
 
     } catch(err) {
