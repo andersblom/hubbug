@@ -6,7 +6,7 @@ const md5 = require("md5");
 exports.createUser = async (req, res, next) => {
     try {
         const newUser = await (new User(req.body));
-        newUser.save(err => {
+        await newUser.save(err => {
             if (err) {
                 throw new Error(err);
             }

@@ -11,6 +11,11 @@ const bugReporterSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    owner: {
+        type: String,
+        required: "No owner was assigned",
+        trim: true,
+    },
     authToken: {
         type: String,
         required: "We need to be able to authenticate to GitHub!",
