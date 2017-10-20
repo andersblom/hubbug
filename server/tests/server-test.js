@@ -12,8 +12,6 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe("Users", () => {
-    User.collection.drop();
-    
     beforeEach(function (done) {
 		const user = new User({
 			email: 'testuser@example.com',
@@ -78,5 +76,15 @@ describe("Users", () => {
                 done();
             });
         });
-    })
+    });
+
+    it("should find a users Bug-Reporter instances");
+    
+    it("should be able to edit a Bug-Reporter info");
+});
+
+describe("Bug reports", () => {
+    it("should be able to report a bug");
+    it("should be able to connect to GitHub");
+    it("should be able to post to GitHub");
 })
