@@ -1,5 +1,7 @@
 const User = require("../models/User");
+const md5 = require("md5");
 
+// Creating user
 // POST /users/create
 exports.createUser = async (req, res, next) => {
     try {
@@ -9,14 +11,52 @@ exports.createUser = async (req, res, next) => {
                 throw new Error(err);
             }
         });
+        res.status(201);
         res.json({
-            success: {
-                newUser
-            }
+            message: "success",
+            result: newUser
         });
     } catch (err) {
         next(err);
     }
 }
 
-//
+// Logging in
+// POST /users 
+exports.loginAsUser = async (req, res, next) => {
+    try {
+        const user = await User.findOne({
+            email: req.body.email
+        });
+
+        console.log("user: ", user);
+
+        // User wasn't found
+        if (!user) {
+            console.log("notfound");
+            res.status(204);
+            res.json({
+                message: "No user was found",
+            });
+        }
+
+        // Password was wrong
+        if (user.password !== md5(req.body.password)) {
+            console.log("wrongpw");
+            res.status(204);
+            res.json({
+                message: "Wrong password"
+            });
+        } 
+
+        // Assuming user is found and password is OK:
+        console.log("gottem");
+        res.status(200);
+        res.json({
+            success: user
+        });
+
+    } catch(err) {
+        next(err);
+    }
+}
