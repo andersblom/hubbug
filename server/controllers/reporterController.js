@@ -19,8 +19,29 @@ exports.createReporter = async (req, res) => {
     }
 }
 
-exports.viewAllReporters = (req, res) => {
+exports.viewAllReporters = async (req, res) => {
+    try {
+        const reporters = await BugReporter.find({
+            owner: req.body.userId
+        });
+        
+        if (!reporters) {
+            res.status(204);
+            res.json({
+                message: "No reporters was found for user",
+                result: reporters
+            })
+        }
+        
+        res.status(200);
+        res.json({
+            message: "success",
+            result: reporters,
+        });
 
+    } catch(err) {
+        next(err);
+    }
 }
 
 exports.viewSingleReporter = (req, res) => {
