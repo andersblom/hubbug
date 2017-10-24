@@ -2,13 +2,13 @@ const User = require("../models/User");
 const md5 = require("md5");
 
 // Creating user
-// POST /users/create
+// POST /user/create
 exports.createUser = async (req, res, next) => {
     try {
         const newUser = await (new User(req.body));
         await newUser.save(err => {
             if (err) {
-                throw new Error(err);
+                next(err);
             }
         });
         res.status(201);
@@ -16,6 +16,8 @@ exports.createUser = async (req, res, next) => {
             message: "success",
             result: newUser
         });
+
+    // If user is a dupe, app goes 💥 bye
     } catch (err) {
         next(err);
     }
