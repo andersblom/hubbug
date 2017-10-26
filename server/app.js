@@ -6,8 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config({ path: 'variables.env' });
-
-const routes = require('./routes/index');
+require("./models/User");
 
 
 app.use(logger('dev'));
@@ -28,6 +27,7 @@ mongoose.connect((app.settings.env === "test") ? process.env.TEST_MONGO_URL : pr
 mongoose.Promise = global.Promise;
 
 // routes -> routes/index.js
+const routes = require('./routes/index');
 app.use('/', routes);
 
 

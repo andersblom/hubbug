@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
-const md5 = require('md5'); 
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -17,10 +17,9 @@ const userSchema = new mongoose.Schema({
             message:'{VALUE} is not a valid Email'
        },
     },
-    password: {
-        required: "Please enter a password",
-        trim: true,
+    name: {
         type: String,
+        required: "Please provide us with a name"
     },
     createdAt: {
         type: Date,
@@ -28,11 +27,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre("save", function(next) {
-    this.password = md5(this.password);
-    next();
-})
-
+userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 userSchema.plugin(mongodbErrorHandler);
 
 module.exports = mongoose.model("User", userSchema);

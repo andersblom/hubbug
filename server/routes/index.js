@@ -3,7 +3,13 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const reporterController = require('../controllers/reporterController');
 
-router.post('/user/create', userController.createUser);
+const { catchErrors } = require('../handlers/errorHandlers');
+
+router.post('/user/create', 
+    userController.validateNewUser, 
+    userController.createUser
+);
+
 router.post('/user', userController.loginAsUser);
 
 router.post('/bugreporter/create', reporterController.createReporter);

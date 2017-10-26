@@ -1,26 +1,25 @@
-const User = require("../models/User");
-const md5 = require("md5");
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const md5 = require('md5');
+const promisify = require('es6-promisify');
 
 // Creating user
 // POST /user/create
-exports.createUser = async (req, res, next) => {
-    try {
-        const newUser = await (new User(req.body));
-        await newUser.save(err => {
-            if (err) {
-                next(err);
-            }
-        });
-        res.status(201);
-        res.json({
-            message: "success",
-            result: newUser
-        });
 
-    // If user is a dupe, app goes 💥 bye
-    } catch (err) {
-        next(err);
-    }
+exports.validateNewUser = (req, res, next) => {
+    console.log("validating user");
+    next();
+}
+
+exports.createUser = async (req, res, next) => {
+    const user = new User({
+        email: req.body.email,
+        name: req.body.name,
+    });
+
+    const register = promisify(User.register, User);
+    await register(user, req.body.password);
+    res.json("user");
 }
 
 // Logging in

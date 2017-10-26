@@ -7,7 +7,8 @@ class App extends Component {
   componentDidMount() {
     axios.post("/user/create", {
       email: "blym@test.dk",
-      password: "test"
+      password: "test",
+      name: "Anders Blom"
     })
     .then(res => {
       console.log(res);
