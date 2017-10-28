@@ -19,7 +19,10 @@ exports.createUser = async (req, res, next) => {
 
     const register = promisify(User.register, User);
     await register(user, req.body.password);
-    res.json("user");
+    res.status(201);
+    res.json({
+        user
+    });
 }
 
 // Logging in
